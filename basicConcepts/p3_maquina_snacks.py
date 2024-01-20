@@ -1,77 +1,91 @@
 #                       PROYECTO DÍA 3 --> MÁQUINA DE SNAKS
-
-print("***      MÁQUINA DE SNACKS       ***")
-
-salir = False
-
-snacks_disponibles = [
-    {"Id": 0, "Producto": "Papitas", "Precio": 300},
-    {"Id": 1, "Producto": "Refresco", "Precio": 50},
-    {"Id": 2, "Producto": "Sandwich", "Precio": 130}
-]
+from p3_maquina_snacks_POO import Snack, Snacks
 
 #Lista donde se almacenan los productos que el cliente pide
-ticket = []
-#print(f'''Snacks disponibles:
-#        Id: {snacks_disponibles[0]["Id"]} -> {snacks_disponibles[0].get("Producto")} - Precio: {snacks_disponibles[0]["Precio"]}
-#        Id: {snacks_disponibles[1]["Id"]} -> {snacks_disponibles[1].get("Producto")} - Precio: {snacks_disponibles[1]["Precio"]}
-#        Id: {snacks_disponibles[2]["Id"]} -> {snacks_disponibles[2].get("Producto")} - Precio: {snacks_disponibles[2]["Precio"]}''')
+productos = []
 
-# Optimización del código anterior:
+print("***      MÁQUINA DE SNACKS       ***")
 print("Snacks disponibles: ")
-for snack in snacks_disponibles:
-    print(f'\tId: {snack["Id"]} '
-          f'-> {snack["Producto"]}'
-          f' - Precio: ${snack["Precio"]}')
 
+#Creación del objeto tipo Snacks (la lista)
+snacks_disponibles = Snacks()
+print(snacks_disponibles)
+
+
+#Creación de la función menu
 def menu():
     print(f'''Menú:
     1. Comprar un snack
     2. Mostrar factura
-    3. Salir
+    3. Agregar un nuevo snack al inventario
+    4. Salir
     ''')
 
 
-#Uso de un while para que el disponible y el menú se vean siempre
+#Creación de la función comprar
+def comprar(snacks, productos):
+    id_snack = int(input("Ingrese el id del snack que desea: "))
 
-while not salir:
-    menu()
-    opcion = int(input("Seleccione una opción: "))
+    #Recorrer la lista de snacks a ver si el ID está disponible
+    snack_encontrado = None
+    for snack in snacks_disponibles.lista_snacks:
+        if id_snack == snack.id:
+            snack_encontrado = snack
+            break
 
-    if opcion == 1:
-
-        snack_deseado = int(input("¿Ingrese el Id del snack deseado: "))
-
-        if snack_deseado == 0:
-            print(f'Se ha agregado a su lista de compras: {snacks_disponibles[0]}')
-            ticket.append((snacks_disponibles[0].get("Producto"), snacks_disponibles[0].get("Precio")))
-
-        elif snack_deseado == 1:
-            print(f'Se ha agregado a su lista de compras: {snacks_disponibles[1]}')
-            ticket.append((snacks_disponibles[1].get("Producto"), snacks_disponibles[1].get("Precio")))
-
-        elif snack_deseado == 2:
-            print(f'Se ha agregado a su lista de compras: {snacks_disponibles[2]}')
-            ticket.append((snacks_disponibles[2].get("Producto"), snacks_disponibles[2].get("Precio")))
-
-        else:
-            print("Id de Snack no disponible")
-
-    elif opcion == 2:
-        total = 0
-        if ticket == []:
-            print("No se ha añadido ningún elemento a la lista de compra")
-
-        else:
-            print("*** Ticket de venta ***")
-            for tupla in ticket:
-                print(f'    {tupla[0]} - {tupla[1]}')
-                total += tupla[1]
-            print(f'    TOTAL DE COMPRA = ${total}')
-
-    elif opcion == 3:
-        print("Muchas gracias por su compra")
-        salir = True
+    if snack_encontrado is not None:
+        productos.append(snack_encontrado)
+        print(f'{snack_encontrado} agregado a la lista de compra')
 
     else:
-        print("Opción no válida")
+        print(f'No fue encontrado el producto de id {id_snack}')
+
+
+#Creación de la función mostrar ticket
+def mostrar_ticket(productos):
+    ticket = f'\t *** Ticket de venta ***'
+    total = 0
+    for producto in productos:
+        ticket += f"\n\t {producto.nombre} - ${producto.precio}"
+        total += producto.precio
+
+    ticket += f'\n\t TOTAL = ${total}'
+    print(ticket)
+
+
+#Creación de la función de agregar snacks
+def agregar_snack(snacks):
+    nombre = input("Nombre del snack: ")
+    precio = int(input("Precio del snack: "))
+    nuevo_snack = Snack(nombre, precio)
+    Snacks.agregar_snacks(snacks,nuevo_snack)
+    print(f'El snack {nuevo_snack} ha sido agregado al inventario')
+
+
+#Creación de la función maquina_snacks
+def maquina_snacks(snacks, ticket):
+    #Snacks ahora es un objeto que contiene la lista de los disponibles
+    #Ticket es donde se van a almacenar los productos
+    salir = False
+    while not salir:
+        menu()
+        opcion = int(input("Seleccione una opción: "))
+        if opcion == 1:
+            comprar(snacks_disponibles, ticket)
+
+        elif opcion == 2:
+            mostrar_ticket(productos)
+
+        elif opcion == 3:
+            agregar_snack(snacks)
+
+        elif opcion == 4:
+            print("Gracias por tu compra")
+            salir = True
+
+        else:
+            print("Opción no válida")
+
+
+#Llamar a la función
+maquina_snacks(Snacks, productos)
