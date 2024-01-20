@@ -21,7 +21,7 @@ class Raton(DispositivoEentrada):
         super().__init__(marca, tipo_entrada)
 
     def __str__(self):
-        return f'Id Raton: {self.id_raton}, Marca: {self.marca}, Tipo entrada: {self.tipo_entrada}'
+        return f'  Id: {self.id_raton}, Marca: {self.marca}, Tipo entrada: {self.tipo_entrada}'
 
 
 #CREACIÓN DE LA CLASE TECLADO:
@@ -37,4 +37,4 @@ class Teclado(DispositivoEentrada):
         super().__init__(marca, tipo_entrada)
 
     def __str__(self):
-        return f'Id Teclado: {self.id_teclado}, Marca: {self.marca}, Tipo entrada: {self.tipo_entrada}'
+        return f'Id: {self.id_teclado}, Marca: {self.marca}, Tipo entrada: {self.tipo_entrada}'
