@@ -18,8 +18,7 @@ personas_db = mysql.connector.connect(
 cursor = personas_db.cursor()
 
 #Para insertar información a la base de datos
-#sentencia_sql = ('INSERT INTO personas(personas, apellido, edad)'
-                 #'VALUES("Carlos", "Perez", 15)')
+#sentencia_sql = ('INSERT INTO personas(personas, apellido, edad)''VALUES("Carlos", "Perez", 15)')
 
 #cursor.execute(sentencia_sql)
 
