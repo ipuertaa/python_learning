@@ -8,9 +8,9 @@ import mysql.connector
 
 personas_db = mysql.connector.connect(
     #Host: IP donde está instalada la base de datos, en este caso es local
-    host='localhost',
-    user='root',
-    password='1234',
+    host=
+    user=
+    password=
     database='personas_db'
 )
 
