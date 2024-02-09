@@ -4,10 +4,10 @@ from mysql.connector import Error
 
 class Conexion:
     DATABASE = 'zona_fit_db'
-    USERNAME = 'root'
-    PASSWORD = '1234'
-    DB_PORT = '3306'
-    HOST = 'localhost'
+    USERNAME = 
+    PASSWORD = 
+    DB_PORT = 
+    HOST = 
     POOL_SIZE = 5
     POOL_NAME = 'zona_fit_pool'
     pool = None
