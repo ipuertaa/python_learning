@@ -1,4 +1,4 @@
-# python_learning
+# 📙 python_learning
 
 ## Registro del proceso de aprendizaje en el curso Python en 7 días de Udemy
 
